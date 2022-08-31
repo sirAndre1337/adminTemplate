@@ -1,7 +1,11 @@
+import Layout from "../components/template/Layout";
+
 export default function Home() {
   return (
     <div>
-      <span className="text-green-300">Andre</span>
+      <Layout titulo="Pagina inicial" subtitulo="Construindo Template ADM">
+        filhos
+      </Layout>
     </div>
   )
 }

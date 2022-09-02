@@ -1,8 +1,12 @@
+import useAppData from "../../data/hook/useAppData";
 import { BellIcon, HomeIcon, LogoutIcon, SettingsIcon } from "../icons";
+import BotaoAlternarTema from "./BotaoAlternarTema";
 import Logo from "./Logo";
 import MenuItem from "./MenuItem";
 
 export default function MenuLateral() {
+    const {tema, alternarTema} = useAppData();
+
     return (
         <aside className="flex flex-col bg-gray-200 text-gray-700 dark:bg-gray-900">
             <div className="flex flex-col items-center justify-center h-20 w-20 bg-gradient-to-r from-indigo-500 to-purple-800">
@@ -13,6 +17,9 @@ export default function MenuLateral() {
                 <MenuItem icone={SettingsIcon} texto="Ajustes" url="/ajustes" />
                 <MenuItem icone={BellIcon} texto="Notificações" url="/notificacoes" />
             </ul>
+                <ul className="flex items-center justify-center pb-5">
+                <BotaoAlternarTema tema={tema} alternarTema={alternarTema} estarNoMenuLateral={true}/>
+                </ul>
             <ul>
                 <MenuItem
                     icone={LogoutIcon}

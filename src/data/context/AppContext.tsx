@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import useAppData from "../hook/useAppData";
 
 type Tema = 'dark' | '';
 
@@ -12,7 +11,7 @@ const AppContext = createContext<AppContextProps>({})
 
 export function AppProvider(props) {
 
-    const [tema, setTema] = useState<Tema>('');
+    const [tema, setTema] = useState<Tema>('dark');
 
     function alternarTema() {
         setTema(tema === '' ? 'dark' : '');

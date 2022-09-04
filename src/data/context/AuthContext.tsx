@@ -9,6 +9,7 @@ interface AuthContextProps {
     usuario?: Usuario;
     loginGoogle?: () => Promise<void>;
     logout?: () => Promise<void>;
+    carregando?: boolean;
 }
 
 const AuthContext = createContext<AuthContextProps>({})
@@ -84,6 +85,8 @@ export function AuthProvider(props) {
         if (Cookies.get('admin-template-auth')) {
             const cancelar = firebase.auth().onIdTokenChanged(configurarSessao);
             return () => cancelar();
+        } else {
+            setCarregando(false)
         }
     }, [])
 
@@ -92,7 +95,8 @@ export function AuthProvider(props) {
         <AuthContext.Provider value={{
             usuario,
             loginGoogle,
-            logout
+            logout,
+            carregando
         }}>
             {props.children}
         </AuthContext.Provider>

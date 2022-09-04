@@ -5,7 +5,7 @@ import useAuth from "../data/hook/useAuth";
 
 export default function Autenticacao() {
 
-    const {usuario , loginGoogle} = useAuth();
+    const { cadastrar, login, loginGoogle } = useAuth();
 
     const [modo, setModo] = useState<'login' | 'cadastro'>('login');
     const [error, setError] = useState(null);
@@ -14,9 +14,23 @@ export default function Autenticacao() {
 
     function submeter() {
         if (modo === 'login') {
-            console.log('login');
+            login(email, senha)
+                .catch((e) => {
+                    if(e.code === 'auth/wrong-password') {
+                        exibirError('Senha inválida!')
+                    } else if(e.code === 'auth/user-not-found') {
+                        exibirError('Usuario não encontrado!')
+                    } else if (e.code === 'auth/too-many-requests') {
+                        exibirError('Usuario Temporariamente bloquiado, tente mais tarde!')
+                    }
+                })
         } else {
-            console.log('Cadastrar');
+            cadastrar(email, senha)
+                .catch((e) =>  {
+                    if(e.code === 'auth/weak-password') {
+                        exibirError('A senha deve ter no minimo 6 caracteres!')
+                    }
+                })
         }
     }
 

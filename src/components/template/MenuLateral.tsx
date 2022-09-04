@@ -1,4 +1,5 @@
 import useAppData from "../../data/hook/useAppData";
+import useAuth from "../../data/hook/useAuth";
 import { BellIcon, HomeIcon, LogoutIcon, SettingsIcon } from "../icons";
 import BotaoAlternarTema from "./BotaoAlternarTema";
 import Logo from "./Logo";
@@ -6,6 +7,8 @@ import MenuItem from "./MenuItem";
 
 export default function MenuLateral() {
     const {tema, alternarTema} = useAppData();
+
+    const {logout} = useAuth();
 
     return (
         <aside className="flex flex-col bg-gray-200 text-gray-700 dark:bg-gray-900">
@@ -24,7 +27,7 @@ export default function MenuLateral() {
                 <MenuItem
                     icone={LogoutIcon}
                     texto="Sair"
-                    onClick={(msg) => console.log('Deslogar do sistema' + msg)}
+                    onClick={logout}
                     className="text-red-600 dark:text-red-400 hover:bg-red-400 hover:text-white dark:hover:text-white"
                 />
             </ul>
